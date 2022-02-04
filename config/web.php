@@ -11,6 +11,10 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'controllerMap' => [
+        // объявляет "controller-map" контроллер, используя название класса
+        'controller-map' => 'app\controllers\SiteController',
+    ],
     // 'defaultRoute' => 'test/index',
     'components' => [
         'request' => [

@@ -111,7 +111,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
-        return $this->render('contact', [
+        return $this->render('/site/contact', [
             'model' => $model,
         ]);
     }
@@ -123,6 +123,6 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        return $this->render('/site/about');
     }
 }

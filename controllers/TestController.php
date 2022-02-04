@@ -8,9 +8,18 @@ class TestController extends Controller
 {
    public $defaultAction = 'my-test';
 
-   public function actionIndex()
+   public function actions()
    {
-      return $this->render('index');
+      return [
+         // объявляет "error" действие с помощью названия класса
+         'test' => 'app\components\HelloAction',
+
+      ];
+   }
+
+   public function actionIndex($name, $age = null)
+   {
+      return 'hello, ' . $name;
       // return 222;
    }
 
