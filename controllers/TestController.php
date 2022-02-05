@@ -17,10 +17,16 @@ class TestController extends Controller
       ];
    }
 
-   public function actionIndex($name, $age = null)
+   public function actionIndex($name = 'Guest', $age = null)
    {
-      return 'hello, ' . $name;
-      // return 222;
+      // return $this->renderFile('@app/views/test/index.php');
+      // return $this->renderPartial('index');
+      // return $this->renderAjax('index');
+      return $this->render('index', [
+         'name' => $name,
+         'age' => $age
+      ]);
+      return $this->render('index', compact('name', 'age'));
    }
 
    public function actionMyTest()
