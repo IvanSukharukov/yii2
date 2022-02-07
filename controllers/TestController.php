@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\EntryForm;
 use yii\web\Controller;
 use yii\web\View;
 
@@ -49,5 +50,16 @@ class TestController extends Controller
    {
 
       return $this->render('my-test');
+   }
+
+   public function actionForm()
+   {
+      $this->view->title = 'test page';
+      $model = new EntryForm();
+
+      $this->layout = 'test-layout';
+      return $this->render('form', [
+         'model' => $model,
+      ]);
    }
 }
