@@ -1,7 +1,9 @@
 <?php
 
+use app\assets\TestAsset;
 use yii\bootstrap4\Html;
 
+TestAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

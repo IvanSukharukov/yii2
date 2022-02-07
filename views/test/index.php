@@ -13,3 +13,12 @@
 <?php $this->beginBlock('block1'); ?>
 ...содержимое блока 1...
 <?php $this->endBlock(); ?>
+
+<?php
+
+$js = <<<JS
+alert('hello');
+JS;
+
+$this->registerJs($js);
+?>

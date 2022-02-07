@@ -7,7 +7,7 @@ use yii\web\View;
 
 class TestController extends Controller
 {
-   public $defaultAction = 'my-test';
+   // public $defaultAction = 'my-test';
    public $myVar;
    public $layout;
 
