@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use yii\web\Controller;
+use yii\web\View;
 
 class TestController extends Controller
 {
    public $defaultAction = 'my-test';
    public $myVar;
+   public $layout;
 
    public function actions()
    {
@@ -21,8 +23,20 @@ class TestController extends Controller
    public function actionIndex($name = 'Guest', $age = null)
    {
       $this->myVar = 'my variable';
+      $this->layout = 'test-layout';
       // debug(\Yii::$app);
       \Yii::$app->view->params['t1'] = 't1 params';
+
+      $this->view->title = 'title page (contoller)';
+      $this->view->registerMetaTag([
+         'name' => 'description',
+         'content' => 'test description - index page',
+      ], 'description');
+
+      \Yii::$app->view->on(View::EVENT_END_BODY, function () {
+         echo date('Y-m-d');
+      });
+
       return $this->render('index', [
          'name' => $name,
          'age' => $age,
@@ -33,7 +47,7 @@ class TestController extends Controller
 
    public function actionMyTest()
    {
-      return __METHOD__;
-      // return 222;
+
+      return $this->render('my-test');
    }
 }

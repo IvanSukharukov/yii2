@@ -11,6 +11,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    // 'layout' => 'test-layout',
     'controllerMap' => [
         // объявляет "controller-map" контроллер, используя название класса
         'controller-map' => 'app\controllers\SiteController',
