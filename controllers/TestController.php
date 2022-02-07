@@ -7,6 +7,7 @@ use yii\web\Controller;
 class TestController extends Controller
 {
    public $defaultAction = 'my-test';
+   public $myVar;
 
    public function actions()
    {
@@ -19,14 +20,15 @@ class TestController extends Controller
 
    public function actionIndex($name = 'Guest', $age = null)
    {
-      // return $this->renderFile('@app/views/test/index.php');
-      // return $this->renderPartial('index');
-      // return $this->renderAjax('index');
+      $this->myVar = 'my variable';
+      // debug(\Yii::$app);
+      \Yii::$app->view->params['t1'] = 't1 params';
       return $this->render('index', [
          'name' => $name,
-         'age' => $age
+         'age' => $age,
+         // 'myVar' => $this->myVar,
       ]);
-      return $this->render('index', compact('name', 'age'));
+      // return $this->render('index', compact('name', 'age'));
    }
 
    public function actionMyTest()
