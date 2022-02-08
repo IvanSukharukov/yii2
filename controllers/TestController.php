@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\EntryForm;
+use Yii;
 use yii\web\Controller;
 use yii\web\View;
 
@@ -55,9 +56,22 @@ class TestController extends Controller
    public function actionForm()
    {
       $this->view->title = 'test page';
+      $this->layout = 'test-layout';
+
       $model = new EntryForm();
 
-      $this->layout = 'test-layout';
+
+      if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+         if (Yii::$app->request->isPjax) {
+            Yii::$app->session->setFlash('success', 'saved successfully - Pjax');
+            //очистить форму, создав новую
+            $model = new EntryForm();
+         } else {
+            Yii::$app->session->setFlash('success', 'saved successfully - standart');
+            return $this->refresh();
+         }
+      }
+
       return $this->render('form', [
          'model' => $model,
       ]);
