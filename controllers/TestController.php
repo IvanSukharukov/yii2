@@ -60,16 +60,9 @@ class TestController extends Controller
 
       $model = new EntryForm();
 
-
       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-         if (Yii::$app->request->isPjax) {
-            Yii::$app->session->setFlash('success', 'saved successfully - Pjax');
-            //очистить форму, создав новую
-            $model = new EntryForm();
-         } else {
-            Yii::$app->session->setFlash('success', 'saved successfully - standart');
-            return $this->refresh();
-         }
+         Yii::$app->session->setFlash('success', 'saved successfully - standart');
+         return $this->refresh();
       }
 
       return $this->render('form', [

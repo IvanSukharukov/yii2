@@ -38,10 +38,11 @@ use yii\widgets\Pjax;
 
    <?= $form->field($model, 'name', [
       'inputOptions' => [
-         'placeholder' => 'test placeholder',
+         'placeholder' => 'Enter Your Name',
       ],
-   ])->hint('Enter Your Name') ?>
+   ]) ?>
    <?= $form->field($model, 'email')->input('email', ['placeholder' => "Enter Your Email"]) ?>
+   <?= $form->field($model, 'topic')->input('text', ['placeholder' => "Enter Your Topic"]) ?>
    <?= $form->field($model, 'text', [
       'template' => "<div class='col-md-5'>{input} \n {hint} \n {error}</div>",
    ])->textarea(['rows' => 5]) ?>
