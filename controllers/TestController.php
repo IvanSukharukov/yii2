@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Country;
 use app\models\EntryForm;
 use Yii;
 use yii\bootstrap4\ActiveForm;
@@ -81,5 +82,11 @@ class TestController extends Controller
         return $this->render('form', [
             'model' => $model,
         ]);
+    }
+
+    public function actionView()
+    {
+        $model = new Country();
+        return $this->render('view', ['model' => $model]);
     }
 }
