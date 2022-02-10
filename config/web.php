@@ -12,6 +12,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     // 'layout' => 'test-layout',
+    'language' => 'ru-RU',
     'controllerMap' => [
         // объявляет "controller-map" контроллер, используя название класса
         'controller-map' => 'app\controllers\SiteController',

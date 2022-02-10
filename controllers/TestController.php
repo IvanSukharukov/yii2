@@ -111,4 +111,35 @@ class TestController extends Controller
         $countries = Country::find(['DE', 'FR', 'GB'])->asArray()->all();
         return $this->render('view', ['countries' => $countries]);
     }
+
+
+    public function actionCreate()
+    {
+        $this->view->title = 'Create';
+
+        $country = new Country();
+
+        /*$country->code = 'IT';
+        $country->name = 'Italy';
+        $country->population = '62000000';
+        $country->status = '1';
+        if($country->save()){
+            Yii::$app->session->setFlash('success', 'ok');
+        } else {
+            Yii::$app->session->setFlash('error', 'error');
+        }*/
+
+        if(Yii::$app->request->isAjax) {
+            $country->load(Yii::$app->request->post());
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($country);
+        }
+
+        if($country->load(Yii::$app->request->post()) && $country->save()){
+            Yii::$app->session->setFlash('success', 'ok');
+            return $this->refresh();
+        }
+
+        return $this->render('create', ['country' => $country]);
+    }
 }
