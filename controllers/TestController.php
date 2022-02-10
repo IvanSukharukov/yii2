@@ -86,7 +86,29 @@ class TestController extends Controller
 
     public function actionView()
     {
-        $model = new Country();
-        return $this->render('view', ['model' => $model]);
+        $status = 1;
+//        $countries = Country::find()->where()->all();
+//        $countries = Country::find()->where("population < 1000000000 AND code <> 'AU'")->all();
+//        $countries = Country::find()->where('status=:status', [':status' => $status])->all();
+
+//        $countries = Country::find()->where("population < :population AND code <> :code", [':population' => 100000000, ':code' => 'AU'])->all();
+
+/*        $countries = Country::find()->where([
+            'code' => ['DE', 'FR', 'GB'],
+            'status' => 1
+        ])->all();*/
+//        $countries = Country::find()->orderBy('population DESC')->all();
+
+/*        $countries = Country::find()->count();
+        debug($countries, 1);*/
+
+//        $countries = Country::find()->limit(1)->where(['code' => 'CN'])->one();
+
+//        $countries = Country::findAll(['DE', 'FR', 'GB']);
+
+//        $countries = Country::findOne('BR');
+
+        $countries = Country::find(['DE', 'FR', 'GB'])->asArray()->all();
+        return $this->render('view', ['countries' => $countries]);
     }
 }
