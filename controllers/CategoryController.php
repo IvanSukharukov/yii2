@@ -23,10 +23,12 @@ class CategoryController extends Controller
         $category = Category::findOne($id);
         $this->view->title = "Category: {$category->title}";
 
+        $products = $category->getProducts(850)->all();
+
         if(!$category){
             throw new NotFoundHttpException('Category not found');
         }
 
-        return $this->render('view', ['category' => $category]);
+        return $this->render('view', ['category' => $category, 'products' => $products]);
     }
 }

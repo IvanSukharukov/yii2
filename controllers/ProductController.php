@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function actionIndex()
     {
         $this->view->title = 'Product';
-        $products = Product::find()->all();
+        $products = Product::find()->with('category')->all();
 
         return $this->render('index', ['products' => $products]);
     }
