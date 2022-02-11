@@ -18,16 +18,15 @@ class CategoryController extends Controller
         return $this->render('index', ['categories' => $categories]);
     }
 
-    public function actionView($id = null)
+    public function actionView($alias = null)
     {
-        $category = Category::findOne($id);
+        $category = Category::findOne(['alias' => $alias]);
         $this->view->title = "Category: {$category->title}";
-
-        $products = $category->getProducts(850)->all();
 
         if(!$category){
             throw new NotFoundHttpException('Category not found');
         }
+        $products = $category->getProducts(850)->all();
 
         return $this->render('view', ['category' => $category, 'products' => $products]);
     }
