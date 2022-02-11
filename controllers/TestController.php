@@ -57,10 +57,28 @@ class TestController extends Controller
         return $this->render('my-test');
     }
 
-    public function actionForm()
+    public function actionForm($alert = '')
     {
         $this->view->title = 'test page';
         $this->layout = 'test-layout';
+
+        switch ($alert){
+            case 'error':
+                Yii::$app->session->setFlash('error', 'error!');
+                break;
+            case 'success':
+                Yii::$app->session->setFlash('success', 'success');
+                break;
+            case 'info':
+                Yii::$app->session->setFlash('info', 'info');
+                break;
+            case 'warning':
+                Yii::$app->session->setFlash('warning', 'warning');
+                break;
+            default:
+                Yii::$app->session->setFlash('info', 'success');
+
+        }
 
         $model = new EntryForm();
 
@@ -75,9 +93,13 @@ class TestController extends Controller
 //            return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            Yii::$app->session->setFlash('success', 'saved successfully - standart');
-            return $this->refresh();
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate()){
+                Yii::$app->session->setFlash('success', 'saved successfully - standart');
+                return $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('error', 'error!');
+            }
         }
 
         return $this->render('form', [
@@ -110,7 +132,7 @@ class TestController extends Controller
 //        $countries = Country::findOne('BR');
 
         $countries = Country::find(['DE', 'FR', 'GB'])->asArray()->all();
-        return $this->render('view', ['countries' => $countries]);
+        return $this->render('views', ['countries' => $countries]);
     }
 
 

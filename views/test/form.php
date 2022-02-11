@@ -12,23 +12,43 @@ use yii\widgets\Pjax;
         // Опции Pjax
     ]); ?>
 
-    <?php if (Yii::$app->session->hasFlash('success')) { ?>
+    <?//= \app\components\HelloWidget::widget(['name' => 'Jhon']) ?>
+
+    <?php \app\components\HelloWidget::begin(['name' => 'Jhon']) ?>
+        <h1>content widget</h1>
+    <?php \app\components\HelloWidget::end() ?>
+
+
+
+
+    <?= \app\widgets\Alert::widget() ?>
+
+    <?php /*if (Yii::$app->session->hasFlash('success')) { */?><!--
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?= Yii::$app->session->getFlash('success') ?>
+            <?/*= Yii::$app->session->getFlash('success') */?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    <?php } ?>
+    <?php /*} */?>
+
+    <?php /*if (Yii::$app->session->hasFlash('error')) { */?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?/*= Yii::$app->session->getFlash('error') */?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    --><?php /*} */?>
 
 
     <?php $form = ActiveForm::begin([
         'id' => 'my-form',
-        // 'enableClientValidation' => false,
+        'enableClientValidation' => false,
         'options' => [
             'class' => 'form-horizontal',
             // 'data' => ['pjax' => true],
-            'data-pjax' => true,
+//            'data-pjax' => true,
         ],
         'fieldConfig' => [
             'template' => "{label} \n <div class='col-md-5'>{input} \n {hint} \n {error}</div>",
@@ -42,7 +62,7 @@ use yii\widgets\Pjax;
         ],
     ]) ?>
     <?= $form->field($model, 'email')->input('email', ['placeholder' => "Enter Your Email"]) ?>
-    <?= $form->field($model, 'country', ['enableAjaxValidation' => true,])->input('text', ['placeholder' => "Enter Your Country"]) ?>
+    <?= $form->field($model, 'country', ['enableAjaxValidation' => false,])->input('text', ['placeholder' => "Enter Your Country"]) ?>
     <?= $form->field($model, 'text', [
         'template' => "<div class='col-md-5'>{input} \n {hint} \n {error}</div>",
     ])->textarea(['rows' => 5]) ?>
@@ -80,5 +100,5 @@ form.on('beforeSubmit', function(){
 });
 JS;
 
-$this->registerJs($js);
+//$this->registerJs($js);
 ?>
